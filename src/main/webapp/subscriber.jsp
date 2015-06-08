@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="org.apache.activemq.ActiveMQConnection"%>
 <%@page import="javax.jms.Message"%>
 <%@page import="javax.jms.TextMessage"%>
@@ -13,8 +14,11 @@
 String str = "print me";
 String subject ="TPLO54";
 String url = ActiveMQConnection.DEFAULT_BROKER_URL;
-String nameOfTextFile = "E:/WebLogFile.txt";
+String filePath = "WebLogFile.txt";
 String endWhile;
+String windowsPath = "C:/ProjetLO54";
+String linuxPath = "~/ProjetLO54";
+String osName = System.getProperty ( "os.name" );
 
 BasicConfigurator.configure();
 
@@ -30,14 +34,41 @@ BasicConfigurator.configure();
         Topic topic = subscriberSession.createTopic(subject); 
         //Creation of a durable subscriber
         TopicSubscriber consumer = subscriberSession.createDurableSubscriber(topic,"AppliWeb");  
+        
+         if(osName.matches(".*Windows.*")){
+            //Create the directory in windows if not eists
+            if( !new File(windowsPath).exists()){
+                new File(windowsPath).mkdir();
+                System.out.println("Created "+ windowsPath+ " directory");
+            }
+            filePath= windowsPath+"/"+filePath;
+        }
+        
+        else{
+            if(osName.matches(".*Linux.*")){
+                //Create the directory in linux if not eists
+                if( !new File(linuxPath).mkdirs()){
+                    new File(linuxPath).mkdir();
+                    System.out.println("Created" + linuxPath+ " directory");
+                }
+                filePath= linuxPath+"/"+filePath;
+            }
+        }
+
+
         //Check if the file already exists
         //If not, we create one else we append to the existing one and insert new line
         FileWriter logFile;
-        File log= new File(nameOfTextFile);
+        File log= new File(filePath);
         if(!log.exists()){
-            logFile = new FileWriter(nameOfTextFile);
+            logFile = new FileWriter(filePath);
         }
-        else logFile = new FileWriter(nameOfTextFile,true);
+        else {
+            logFile = new FileWriter(filePath,true);
+        }
+        logFile.write(System.getProperty("line.separator"));
+        //Significate the dtart of listening with the date
+        logFile.write("------------- Begin listening : "+new Date().toString()+ " -------------");
         logFile.write(System.getProperty("line.separator"));
         
         // Waiting for the message
@@ -57,6 +88,8 @@ BasicConfigurator.configure();
             }
         }
         }
+        //Signifiacte the end of he listening with the date
+        logFile.write("------------- Stop listening  : "+new Date().toString()+ " -------------");
         logFile.close();
         connection.close();
 
