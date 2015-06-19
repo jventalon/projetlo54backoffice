@@ -6,9 +6,7 @@
 package fr.utbm.projetlo54.projetlo54backoffice;
 
 import fr.utbm.projetlo54.service.ClientService;
-import fr.utbm.projetlo54.service.CourseSessionService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -5,16 +5,8 @@
  */
 package fr.utbm.projetlo54.projetlo54backoffice;
 
-import fr.utbm.projetlo54.entity.Client;
-import fr.utbm.projetlo54.entity.Course;
-import fr.utbm.projetlo54.entity.CourseSession;
-import fr.utbm.projetlo54.entity.Location;
-import fr.utbm.projetlo54.service.CourseService;
 import fr.utbm.projetlo54.service.CourseSessionService;
-import fr.utbm.projetlo54.service.LocationService;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -6,7 +6,6 @@
 package fr.utbm.projetlo54.projetlo54backoffice;
 
 import fr.utbm.projetlo54.entity.Client;
-import fr.utbm.projetlo54.entity.CourseSession;
 import fr.utbm.projetlo54.service.ClientService;
 import fr.utbm.projetlo54.service.CourseSessionService;
 import java.io.IOException;
