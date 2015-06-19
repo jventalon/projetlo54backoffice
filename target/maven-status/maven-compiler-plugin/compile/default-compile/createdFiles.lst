@@ -1,3 +1,4 @@
 fr\utbm\dvdstore\projetbackoffice\CoursesListServlet.class
-fr\utbm\dvdstore\projetbackoffice\SessionInscriptionServlet.class
-fr\utbm\dvdstore\projetbackoffice\CourseDescriptionServlet.class
+fr\utbm\dvdstore\projetbackoffice\SessionRegistrationServlet.class
+fr\utbm\dvdstore\projetbackoffice\ClientInfoServlet.class
+fr\utbm\dvdstore\projetbackoffice\SessionRegistrationFormServlet.class

@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.utbm.dvdstore.projetbackoffice;
+package fr.utbm.projetlo54.projetlo54backoffice;
 
-import fr.utbm.projetlo54.entity.Client;
-import fr.utbm.projetlo54.entity.Course;
-import fr.utbm.projetlo54.entity.CourseSession;
-import fr.utbm.projetlo54.entity.Location;
-import fr.utbm.projetlo54.service.CourseService;
+import fr.utbm.projetlo54.service.ClientService;
 import fr.utbm.projetlo54.service.CourseSessionService;
-import fr.utbm.projetlo54.service.LocationService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justine Ventalon
  */
-@WebServlet(name = "SessionInscriptionServlet", urlPatterns = {"/session_registration_form"})
-public class SessionRegistrationFormServlet extends HttpServlet {
+@WebServlet(name = "ClientInfoServlet", urlPatterns = {"/client_info"})
+public class ClientInfoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,21 +35,22 @@ public class SessionRegistrationFormServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        // adds the course session to the request attributes
+        // adds the client to the request attributes
         String id = request.getParameter("id");
         RequestDispatcher rd;
         try
         {
-            int csid = Integer.parseInt(id);
-            CourseSessionService css = new CourseSessionService();
-            //CourseSession cs = css.getCourseSessionByIdWithLocation(csid);
-            //request.setAttribute("cs", cs);
-            rd = request.getRequestDispatcher("sessionRegistrationForm.jsp");
+            int cid = Integer.parseInt(id);
+            ClientService cs = new ClientService();
+            //Client c = cs.getClientByIdWithCourseSession(cid);
+            //request.setAttribute("c", c);
+            rd = request.getRequestDispatcher("cientInfo.jsp");
         }
         catch (NumberFormatException e)
         {
-            rd = request.getRequestDispatcher("sessionNotFound.jsp");
+            rd = request.getRequestDispatcher("clientNotFound.jsp");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.utbm.dvdstore.projetbackoffice;
+package fr.utbm.projetlo54.projetlo54backoffice;
 
+import fr.utbm.projetlo54.entity.Client;
 import fr.utbm.projetlo54.entity.Course;
+import fr.utbm.projetlo54.entity.CourseSession;
 import fr.utbm.projetlo54.entity.Location;
 import fr.utbm.projetlo54.service.CourseService;
+import fr.utbm.projetlo54.service.CourseSessionService;
 import fr.utbm.projetlo54.service.LocationService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,9 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justine Ventalon
  */
-@WebServlet(name = "CoursesListServlet", urlPatterns = {"/courses_list"})
-public class CoursesListServlet extends HttpServlet 
-{
+@WebServlet(name = "SessionInscriptionServlet", urlPatterns = {"/session_registration_form"})
+public class SessionRegistrationFormServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,19 +41,21 @@ public class CoursesListServlet extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        // adds the list with all locations to the request attributes
-        LocationService ls = new LocationService();
-        List<Location> locations =  ls.getAllLocations();
-        request.setAttribute("locations", locations);
-        
-        // adds the list with all courses to the request attributes
-        CourseService cs = new CourseService();
-        List<Course> courses =  cs.getAllCourses();
-        request.setAttribute("courses", courses);
-        
-        // calls the view
-        RequestDispatcher rd = request.getRequestDispatcher("coursesList.jsp");
-        rd.forward(request, response);
+        // adds the course session to the request attributes
+        String id = request.getParameter("id");
+        RequestDispatcher rd;
+        try
+        {
+            int csid = Integer.parseInt(id);
+            CourseSessionService css = new CourseSessionService();
+            //CourseSession cs = css.getCourseSessionByIdWithLocation(csid);
+            //request.setAttribute("cs", cs);
+            rd = request.getRequestDispatcher("sessionRegistrationForm.jsp");
+        }
+        catch (NumberFormatException e)
+        {
+            rd = request.getRequestDispatcher("sessionNotFound.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
