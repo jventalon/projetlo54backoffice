@@ -15,16 +15,18 @@
         <h1>Training courses - Client information</h1>
         <p>Your personal information:<br/>
             id: ${c.id}<br/>
-            first name: ${c.firstname}<br/>
-            last name: ${c.lastname}<br/>
+            first name: ${c.firstName}<br/>
+            last name: ${c.lastName}<br/>
             address: ${c.address}<br/>
             phone number: ${c.phone}<br/>
             email address: ${c.email}<br/>
         </p>
-         <p>You have been enrolled in the following course session:<br/>
-            course code: ${courseSession.course.code}<br/>
-            course title: ${courseSession.course.title}<br/>
-            session: from ${courseSession.startDate} to ${courseSession.endDate} in ${courseSession.location.city}
-        </p>
+         <c:if test="${not empty c.session}">
+            <p>You have been enrolled in the following course session:<br/>
+               course code: ${c.session.course.code}<br/>
+               course title: ${c.session.course.title}<br/>
+               session: from ${c.session.startDate} to ${c.session.endDate} in ${c.session.location.city}
+            </p>
+         </c:if>
     </body>
 </html>

@@ -43,7 +43,7 @@ public class ClientInfoServlet extends HttpServlet {
             ClientService cs = new ClientService();
             Client c = cs.getClientByIdWithCourseSession(cid);
             request.setAttribute("c", c);
-            rd = request.getRequestDispatcher("cientInfo.jsp");
+            rd = request.getRequestDispatcher("clientInfo.jsp");
         }
         catch (NumberFormatException e)
         {

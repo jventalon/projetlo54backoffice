@@ -25,13 +25,12 @@
         <p>
             Please fill in this form:
         </p>
-        <form method="POST" action="session_registration">
-            first name: <input type="text" name="firstname"/><br/>
-            last name: <input type="text" name="lastname"/><br/>
-            address: <input type="text" name="address"/><br/>
-            phone number:<input type="text" name="phone"/><br/>
-            email address:<input type="text" name="email"/><br/>
-            <input type="hidden" name="csid" value="${cs.id}">
+        <form method="POST" action="session_registration_form?id=${cs.id}">
+            first name: <input type="text" name="firstname" value="${param.firstname}"/> ${firstnameError}<br/>
+            last name: <input type="text" name="lastname" value="${param.lastname}"/> ${lastnameError}<br/>
+            address: <input type="text" name="address" value="${param.address}"/> ${addressError}<br/>
+            phone number:<input type="text" name="phone" value="${param.phone}"/> ${phoneError}<br/>
+            email address:<input type="text" name="email" value="${param.email}"/> ${emailError}<br/>
             <input type="submit" value="register">
         </form>
     </body>
