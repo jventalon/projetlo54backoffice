@@ -6,6 +6,7 @@
 package fr.utbm.projetlo54.projetlo54backoffice;
 
 import fr.utbm.projetlo54.entity.Client;
+import fr.utbm.projetlo54.entity.CourseSession;
 import fr.utbm.projetlo54.service.ClientService;
 import fr.utbm.projetlo54.service.CourseSessionService;
 import java.io.IOException;
@@ -59,16 +60,16 @@ public class SessionRegistrationServlet extends HttpServlet {
                 int sessionID = Integer.parseInt(csid);
                 c.setSessionID(sessionID);
                 ClientService cs = new ClientService();
-                //int cid = cs.registerClient(c);
-                //if (cid != -1)
+                int cid = cs.registerClient(c);
+                if (cid != -1)
                 {
-                    //request.setAttribute("cid", cid);
+                    request.setAttribute("cid", cid);
                     CourseSessionService css = new CourseSessionService();
-                    //CourseSession courseSession = css.getCourseSessionByIdWithLocation();
-                    //request.setAttribute("courseSession", courseSession);
+                    CourseSession courseSession = css.getCourseSessionById(cid);
+                    request.setAttribute("courseSession", courseSession);
                     rd = request.getRequestDispatcher("sessionRegistrationOK.jsp");
                 }
-                //else
+                else
                 {
                     rd = request.getRequestDispatcher("sessionRegistrationKO.jsp");
                 }

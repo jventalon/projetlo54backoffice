@@ -5,6 +5,7 @@
  */
 package fr.utbm.projetlo54.projetlo54backoffice;
 
+import fr.utbm.projetlo54.entity.CourseSession;
 import fr.utbm.projetlo54.service.CourseSessionService;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -40,14 +41,24 @@ public class SessionRegistrationFormServlet extends HttpServlet {
         {
             int csid = Integer.parseInt(id);
             CourseSessionService css = new CourseSessionService();
-            //CourseSession cs = css.getCourseSessionByIdWithLocation(csid);
-            //request.setAttribute("cs", cs);
-            rd = request.getRequestDispatcher("sessionRegistrationForm.jsp");
+            CourseSession cs = css.getCourseSessionById(csid);
+            if (cs == null)
+            {
+                rd = request.getRequestDispatcher("sessionNotFound.jsp");
+            }
+            else
+            {
+                request.setAttribute("cs", cs);
+                rd = request.getRequestDispatcher("sessionRegistrationForm.jsp");
+            }
         }
         catch (NumberFormatException e)
         {
             rd = request.getRequestDispatcher("sessionNotFound.jsp");
         }
+        
+        // calls the view
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

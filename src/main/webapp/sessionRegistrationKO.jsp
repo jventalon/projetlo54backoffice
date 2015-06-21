@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Training Courses - Registration failed</h1>
-        <p>There has been an error during your registration. Please try again.</p>");
+        <p>There has been an error during your registration. Please try again.</p>
         <a href="session_registration?id=${cs.id}">Go back to the form</a>
     </body>
 </html>

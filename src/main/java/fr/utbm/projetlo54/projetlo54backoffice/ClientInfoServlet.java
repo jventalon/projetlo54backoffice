@@ -5,6 +5,7 @@
  */
 package fr.utbm.projetlo54.projetlo54backoffice;
 
+import fr.utbm.projetlo54.entity.Client;
 import fr.utbm.projetlo54.service.ClientService;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -40,8 +41,8 @@ public class ClientInfoServlet extends HttpServlet {
         {
             int cid = Integer.parseInt(id);
             ClientService cs = new ClientService();
-            //Client c = cs.getClientByIdWithCourseSession(cid);
-            //request.setAttribute("c", c);
+            Client c = cs.getClientByIdWithCourseSession(cid);
+            request.setAttribute("c", c);
             rd = request.getRequestDispatcher("cientInfo.jsp");
         }
         catch (NumberFormatException e)
@@ -49,6 +50,8 @@ public class ClientInfoServlet extends HttpServlet {
             rd = request.getRequestDispatcher("clientNotFound.jsp");
         }
         
+        // Calls the view
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

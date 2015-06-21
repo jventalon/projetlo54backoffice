@@ -11,12 +11,11 @@ import fr.utbm.projetlo54.entity.Location;
 import fr.utbm.projetlo54.service.CourseService;
 import fr.utbm.projetlo54.service.LocationService;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -77,7 +76,15 @@ public class CoursesListServlet extends HttpServlet
         Location l = null;
         if (lid != null && !lid.equals(""))
         {
-            l = ls.getLocation(Integer.parseInt(lid));
+            try
+            {
+                int locid = Integer.parseInt(lid);
+                l = ls.getLocation(locid);
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println(e + "location id must be an integer");
+            }
         }
         
         // gets the list of courses with next course sessions corresponding to criteria
@@ -86,8 +93,8 @@ public class CoursesListServlet extends HttpServlet
 
         // sort the list in a map with courses as key and lists of corresponding 
         // course sessions as values (for easier displaying in the view)
-        Map<Course, List<CourseSession>> courses = new HashMap();
-        if (!courseSessions.isEmpty() && courseSessions.get(0) != null)
+        Map<Course, List<CourseSession>> courses = new LinkedHashMap();
+        if (courseSessions != null && !courseSessions.isEmpty())
         {
             Course course = (Course) courseSessions.get(0)[0];
             List<CourseSession> list = new ArrayList();

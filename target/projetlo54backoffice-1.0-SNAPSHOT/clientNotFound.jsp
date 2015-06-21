@@ -14,7 +14,7 @@
     <body>
         <h1>Training Courses - Client not found</h1>
         <p>
-            The client you requested doesn't exist.
+            The client you requested does not exist.
         </p>
         <p>
             <a href="courses_list">Go back to the courses list</a>
