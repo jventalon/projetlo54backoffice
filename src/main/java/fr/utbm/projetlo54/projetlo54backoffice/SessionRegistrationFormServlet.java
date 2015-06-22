@@ -7,6 +7,7 @@ package fr.utbm.projetlo54.projetlo54backoffice;
 
 import fr.utbm.projetlo54.entity.Client;
 import fr.utbm.projetlo54.entity.CourseSession;
+import fr.utbm.projetlo54.entity.Producer;
 import fr.utbm.projetlo54.service.ClientService;
 import fr.utbm.projetlo54.service.CourseSessionService;
 import java.io.IOException;
@@ -154,7 +155,7 @@ public class SessionRegistrationFormServlet extends HttpServlet {
                 c.setLastName(lastname);
                 c.setAddress(address);
                 c.setPhone(phone);
-                c.setEmail(email);               
+                c.setEmail(email);
                 try
                 {
                     int sessionID = Integer.parseInt(csid);
@@ -165,6 +166,16 @@ public class SessionRegistrationFormServlet extends HttpServlet {
                     int cid = cs.registerClient(c);
                     if (cid != -1)
                     {
+                        // sends a message on the topic for client registrations
+                        try
+                        {
+                            Producer p = new Producer("TPLO54");
+                            p.sendToTopic("new client registered with id = " + cid);
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e);
+                        }
                         request.setAttribute("cid", cid);
                         request.setAttribute("courseSession", courseSession);
                         rd = request.getRequestDispatcher("sessionRegistrationOK.jsp");

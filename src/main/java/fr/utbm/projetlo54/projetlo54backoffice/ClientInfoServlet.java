@@ -42,8 +42,15 @@ public class ClientInfoServlet extends HttpServlet {
             int cid = Integer.parseInt(id);
             ClientService cs = new ClientService();
             Client c = cs.getClientByIdWithCourseSession(cid);
-            request.setAttribute("c", c);
-            rd = request.getRequestDispatcher("clientInfo.jsp");
+            if (c == null)
+            {
+                rd = request.getRequestDispatcher("clientNotFound.jsp");
+            }
+            else
+            {
+                request.setAttribute("c", c);
+                rd = request.getRequestDispatcher("clientInfo.jsp");
+            }
         }
         catch (NumberFormatException e)
         {

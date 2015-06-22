@@ -9,24 +9,36 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <title>Training courses - Client information</title>
     </head>
     <body>
-        <h1>Training courses - Client information</h1>
-        <p>Your personal information:<br/>
-            id: ${c.id}<br/>
-            first name: ${c.firstName}<br/>
-            last name: ${c.lastName}<br/>
-            address: ${c.address}<br/>
-            phone number: ${c.phone}<br/>
-            email address: ${c.email}<br/>
-        </p>
-         <c:if test="${not empty c.session}">
-            <p>You have been enrolled in the following course session:<br/>
-               course code: ${c.session.course.code}<br/>
-               course title: ${c.session.course.title}<br/>
-               session: from ${c.session.startDate} to ${c.session.endDate} in ${c.session.location.city}
+        <div class="container">
+            <h1>Training courses - Client information</h1>
+            <p>
+                <a href="courses_list"><span class="glyphicon glyphicon-chevron-left"></span> Go back to the courses list</a>
             </p>
-         </c:if>
+            <p>
+                Your personal information:
+                <ul>
+                    <li>Id: ${c.id}</li>
+                    <li>First name: ${c.firstName}</li>
+                    <li>Last name: ${c.lastName}</li>
+                    <li>Address: ${c.address}</li>
+                    <li>Phone number: ${c.phone}</li>
+                    <li>Email address: ${c.email}</li>
+                </ul>
+            </p>
+             <c:if test="${not empty c.session}">
+                <p>
+                    You have been enrolled in the following course session:
+                    <ul>
+                       <li>Course code: ${c.session.course.code}</li>
+                       <li>Course title: ${c.session.course.title}</li>
+                       <li>Session: from ${c.session.startDate} to ${c.session.endDate} in ${c.session.location.city}</li>
+                    </ul>
+                </p>
+             </c:if>
+        </div>
     </body>
 </html>
